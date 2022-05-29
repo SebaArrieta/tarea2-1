@@ -1,4 +1,2 @@
-This_is_an_[example]_text
-This<<_is_another<<_exam<<>ple
-Yet_]anot[her_exa[mple
-<<A_final>>_example
+A
+B

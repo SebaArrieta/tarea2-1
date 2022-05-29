@@ -1,6 +1,5 @@
 #include <iostream>
 #include <fstream>
-#include <string>
 using namespace std;
 typedef char tElem;
 
@@ -18,7 +17,7 @@ class Lista{
         unsigned int pos;
     public:
         Lista();
-        ~Lista(){};
+        ~Lista();
         tNodo* crearNodo(tElem x);
         int insertar(tElem x);
         void moveToStart();
@@ -34,6 +33,17 @@ Lista::Lista(){
     head = tail = curr = new tNodo;
     head->sig = tail ->sig = curr->sig = NULL;
     size = 0; pos = 0;
+}
+
+Lista::~Lista(){ // destructor que elimina todos los nodos para que no queden en la memoria
+    tNodo* nodo;
+
+    while(head!= NULL){ //se detiene cuando elimine todos los nodos y solo quede el ultimo que apunta a NULL;
+        nodo = head->sig; //apunta al siguiente y al siguiente asi sucesivamente
+        delete head; //eliminamos el head de la lista
+        head = nodo; //el nuevo head va a ser el que continuaba al head actual
+    }
+    delete head; // elimina el ultimo head
 }
 
 int Lista::insertar(tElem x){
@@ -68,7 +78,7 @@ tElem Lista::getInfo(){
     if(curr->sig != NULL){
         return curr->sig->info;
     }
-    return 'a';
+    return '\0';
 }
 
 void modificarTexto(){
@@ -86,73 +96,50 @@ void modificarTexto(){
         exit(1);
     }
 
-    Lista list,aux;
+    Lista* list = new Lista;
     char c;// caracter
     unsigned int size;
     entrada.get(c);
     while(!entrada.eof()){ //para cuando llegue al final del archivo
-        while(c != '\r' && c != '\n'){ //se detiene cuando encuentra un salto de linea
+        while(c != '\r' && c != '\n' && !entrada.eof()){ //se detiene cuando encuentra un salto de linea
             switch(c){
                 case '<':
-                    list.prev();
+                    list->prev();
                     break;
                 case '>':
-                    list.next();
+                    list->next();
                     break;
                 case '[':
-                    list.moveToStart();
+                    list->moveToStart();
                     break;
                 case ']':
-                    list.moveToEnd();
+                    list->moveToEnd();
                     break;
                 default:
-                    list.insertar(c);
-                    list.next();
+                    list->insertar(c);
+                    list->next();
                     break;
             }
             entrada.get(c);
         }
-        size = list.getSize();
-        list.moveToStart();
+        size = list->getSize();
+        list->moveToStart();
 
         for(unsigned int i = 0; i<size;i++){
-            salida<<list.getInfo();
-            list.next();
+            salida<<list->getInfo();
+            list->next();
         }
-        salida<<'\n';
-        list = aux;
+        delete list;
+        list = new Lista;
         entrada.get(c);//se salta el \r
-        entrada.get(c); // se salta el \n
+        entrada.get(c);// se salta el \n
+        if(!entrada.eof()){ salida<<'\n'; } // solo hace el salto de linea cuando no sea el final del texto
     }
+    delete list; //elimina la ultima lista creada
     entrada.close();
     salida.close();
 
 } 
-
-// void salidaTexto(Lista list){
-//     ofstream salida;
-//     char c; //caracter
-//     unsigned int size = list.getSize();
-//     salida.open("teclado-salida.txt");
-//     if(!salida.is_open()){
-//         cout<<"error al abrir el archivo de salida"<<endl; 
-//         exit(1);
-//     }
-//     list.moveToStart();
-
-//     for(unsigned int i = 0; i<size;i++){
-//         salida<<list.getInfo();
-//         list.next();
-//     }
-//     salida<<'\n';
-//     salida.close();
-// }
-
-// void modificarArchivo(){
-    
-//     Lista list = entradaTexto();
-//     salidaTexto(list);
-// }
 
 int main(){
     modificarTexto();
