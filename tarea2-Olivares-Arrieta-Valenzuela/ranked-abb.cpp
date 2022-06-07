@@ -38,7 +38,8 @@ class RankedABB{
 };
 
 /*****
-*RankedABB::RankedABB
+*Funcion tipo: RankedABB::
+ Nombre Funcion:RankedABB
 ******
 * constructor de la clase RankedABB,
 el constructor establece la raiz en null y el num ele en 0
@@ -55,7 +56,8 @@ RankedABB::RankedABB(){
 }
 
 /*****
-*RankedABB::~RankedABB
+*Funcion tipo: ~RankedABB::
+ Nombre Funcion: ~RankedABB
 ******
 * Destructor de la clase RankedABB.
 El destructor hace una llamada al metodo clear para eliminar cada nodo que existe en el arbol,
@@ -73,7 +75,8 @@ RankedABB::~RankedABB(){ //elimina mediante el clear y luego elimina la raiz
 }
 
 /*****
-*void RankedABB::clear
+*Funcion tipo: void 
+ Nombre Funcion: RankedABB::clear
 ******
 * El metodo va eliminando cada nodo perteneciente al arbol mediante una busqueda recursiva in order.
 El metodo va hacia el nodo de más a la izquierda y ve si es NULL,
@@ -95,7 +98,8 @@ void RankedABB::clear(tNodo *&nodo){ //va eliminando mediante busqueda in order
 }
 
 /*****
-* tNodo* RankedABB::nuevoNodo
+* Funcion tipo: tNodo* 
+  Nombre Funcion: RankedABB::nuevoNodo
 ******
 * Metodo que crea un nuevo nodo mediante memoria dinamica.
 Este nodo contendra la informacion pasada por parametros y establecerá sus hijos en NULL.
@@ -120,7 +124,8 @@ tNodo* RankedABB::nuevoNodo(tElem x){
 }
 
 /*****
-* void RankedABB::insert
+* Funcion tipo: void
+  Nombre Funcion: insert
 ******
 * Metodo que hace una llamada a una sobrecarga suya, luego llama al metodo seContador para contar....
 y finalmente llama al metodo setContadorMenor
@@ -139,7 +144,8 @@ void RankedABB::insert(tElem x){ //se crea una sobrecarga del metodo, para que a
 }
 
 /*****
-* void RankedABB::insert
+* Funcion tipo: void
+  Nombre Funcion: insert
 ******
 *Metodo que mediante recursividad va recorriendo el arbol viendo si el valor entregado es menor que el del nodo actual o mayor,
 dependiendo de si es mayor o menor toma un camino u otro,
@@ -167,16 +173,19 @@ void RankedABB::insert(tElem x, tNodo *&nodo){
 }
 
 /*****
-* TipoFunción NombreFunción
+* Funcion tipo: int
+  Nombre Funcion: setContador
 ******
-* Resumen Función
+* Función que contabiliza todos los hijos de cada nodo y los alacena en la el parámetro contador además de esto también obtiene la cantidad de hijos de los sub arboles izquierdos
+y los guarda en la variable contadorMenor, la finalidad de esta función es tener los valores necesarios para calcular la cantidad de nodos que tengan un valor menor, hasta ahora
+solo se calcula una parte de los nodos menores y el resto se complementará en la función setContadorMenor.
 ******
 * Input:
-* tipoParámetro NombreParámetro : Descripción Parámetro
+* tNodo *nodo: parametro que indica el nodo por el cual se iniciara el recorrido para iniciar el conteo de nodos.
 * .......
 ******
 * Returns:
-* TipoRetorno, Descripción retorno
+* esta funcion es recursiva y retorna el parametro contador el cual indica la cantidad de hijos del nodo indicado en el parametro
 *****/
 int RankedABB::setContador(tNodo *nodo){ 
     if(nodo == NULL){
@@ -200,16 +209,19 @@ int RankedABB::setContador(tNodo *nodo){
 }
 
 /*****
-* TipoFunción NombreFunción
+* Funcion tipo: void 
+  Nombre Funcion: setContadorMenor
 ******
-* Resumen Función
+* Esta función ayuda a complementar la variable ContadorMenor de cada nodo al sumar la cantidad de nodos con valores menores al pasado por parámetro que se encuentran en otras 
+zonas del árbol que no sean solo del lado izquierdo del nodo en el parámetro.
+
 ******
 * Input:
-* tipoParámetro NombreParámetro : Descripción Parámetro
+* tNodo *&nodo: Parametro que se usa para pasar un puntero por referencia, en este caso un nodo de un arbol
 * .......
 ******
 * Returns:
-* TipoRetorno, Descripción retorno
+* void, esta funcion no retorna nada y es recursiva 
 *****/
 void RankedABB::setContadorMenor(tNodo *nodo){
     if(nodo == NULL){
@@ -232,7 +244,8 @@ void RankedABB::setContadorMenor(tNodo *nodo){
 }
 
 /*****
-* bool RankedABB::find
+* Funcion tipo: bool 
+  Nombre Funcion:find
 ******
 * Metodo que llama a una sobrecarga suya, retornando el valor que retorne el metodo
 ******
@@ -247,7 +260,8 @@ bool RankedABB::find(tElem x){ //se crea una sobrecarga del metodo, para que al 
 }
 
 /*****
-* bool RankedABB::find
+* Funcion tipo: bool 
+  Nombre Funcion:find
 ******
 *Metodo que mediante recursividad va recorriendo el arbol viendo si el valor entregado es menor que el del nodo actual, mayor o igual
 dependiendo de si es mayor o menor toma un camino u otro,
@@ -273,7 +287,8 @@ bool RankedABB::find(tElem x,tNodo *&nodo){
 }
 
 /*****
-* int RankedABB::rank
+* Funcion tipo: int 
+  Nombre Funcion:rank
 ******
 * Metodo que llama a una sobrecarga suya pasandole por parametros la informacion del nodo
 ******
@@ -289,7 +304,8 @@ int RankedABB::rank(tElem x){ //se crea una sobrecarga del metodo, para que al a
 }
 
 /*****
-* int RankedABB::rank
+* Funcion tipo:int 
+  Nombre Funcion:rank
 ******
 * metodo que 
 ******
